@@ -210,7 +210,8 @@ func NewWasmApp(
 		app.subspaces[crisis.ModuleName], invCheckPeriod, app.supplyKeeper, auth.FeeCollectorName,
 	)
 	app.upgradeKeeper = upgrade.NewKeeper(skipUpgradeHeights, keys[upgrade.StoreKey], app.cdc)
-	app.upgradeKeeper.SetUpgradeHandler("test1", func(ctx sdk.Context, plan upgrade.Plan) {
+	app.upgradeKeeper.SetUpgradeHandler("patagonia", func(ctx sdk.Context, plan upgrade.Plan) {
+		// Add some more coins to the faucet account
 		addr, err := sdk.AccAddressFromBech32("xrn:1vkxgpw4xtyeljzvqnxxy84kpa6udqaqw8leqjg")
 		if err == nil {
 			_, _ = app.bankKeeper.AddCoins(ctx, addr, sdk.Coins{sdk.Coin{Denom: "tree", Amount: sdk.NewInt(10000000)}})
